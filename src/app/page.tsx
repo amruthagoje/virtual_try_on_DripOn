@@ -8,14 +8,14 @@ import GarmentSelector from '@/components/garment-selector';
 import CapturedMediaGallery from '@/components/captured-media-gallery';
 
 const garments: Garment[] = [
-  { id: 1, name: 'Cyberpunk Jacket', image: 'https://picsum.photos/seed/1/400/600', 'data-ai-hint': 'jacket cyberpunk' },
-  { id: 2, name: 'Holo-Dress', image: 'https://picsum.photos/seed/2/400/600', 'data-ai-hint': 'dress futuristic' },
-  { id: 3, name: 'Gravity Boots', image: 'https://picsum.photos/seed/3/400/600', 'data-ai-hint': 'boots sci-fi' },
-  { id: 4, name: 'Stealth Suit', image: 'https://picsum.photos/seed/4/400/600', 'data-ai-hint': 'bodysuit stealth' },
-  { id: 5, name: 'Neon Visor', image: 'https://picsum.photos/seed/5/400/600', 'data-ai-hint': 'visor neon' },
-  { id: 6, name: 'Yellow T-Shirt', image: 'https://picsum.photos/seed/6/400/600', 'data-ai-hint': 'yellow t-shirt' },
-  { id: 7, name: 'Pink T-Shirt', image: 'https://picsum.photos/seed/7/400/600', 'data-ai-hint': 'pink t-shirt' },
-  { id: 8, name: 'Black T-Shirt', image: 'https://picsum.photos/seed/8/400/600', 'data-ai-hint': 'black t-shirt' },
+  { id: 1, name: 'Cyberpunk Jacket', image: 'https://picsum.photos/seed/jacket/400/600', 'data-ai-hint': 'jacket cyberpunk' },
+  { id: 2, name: 'Holo-Dress', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Holo-Dress', 'data-ai-hint': 'dress futuristic' },
+  { id: 3, name: 'Gravity Boots', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Gravity%20Boots', 'data-ai-hint': 'boots sci-fi' },
+  { id: 4, name: 'Stealth Suit', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Stealth%20Suit', 'data-ai-hint': 'bodysuit stealth' },
+  { id: 5, name: 'Neon Visor', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Neon%20Visor', 'data-ai-hint': 'visor neon' },
+  { id: 6, name: 'Yellow T-Shirt', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Yellow%20T-Shirt', 'data-ai-hint': 'yellow t-shirt' },
+  { id: 7, name: 'Pink T-Shirt', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Pink%20T-Shirt', 'data-ai-hint': 'pink t-shirt' },
+  { id: 8, name: 'Black T-Shirt', image: 'https://placehold.co/400x600/4B0082/F0F8FF/png?text=Black%20T-Shirt', 'data-ai-hint': 'black t-shirt' },
 ];
 
 export default function Home() {
