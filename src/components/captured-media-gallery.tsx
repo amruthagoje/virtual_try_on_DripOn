@@ -41,8 +41,8 @@ export default function CapturedMediaGallery({ items, isLoading }: CapturedMedia
     <>
       <Card className="shadow-md">
         <CardHeader>
-           <CardTitle className="font-headline">Captured Media</CardTitle>
-           <CardDescription>Download your virtual outfits.</CardDescription>
+           <CardTitle className="font-headline">My Wardrobe</CardTitle>
+           <CardDescription>Your saved virtual outfits.</CardDescription>
         </CardHeader>
         <CardContent>
           {isLoading ? (
