@@ -21,6 +21,7 @@ const garments: Garment[] = [
   { id: 6, name: 'Yellow T-Shirt', image: picsum_images.yellow_shirt.src, 'data-ai-hint': 'yellow t-shirt' },
   { id: 7, name: 'Pink T-Shirt', image: picsum_images.pink_shirt.src, 'data-ai-hint': 'pink t-shirt' },
   { id: 8, name: 'Black T-Shirt', image: picsum_images.black_shirt.src, 'data-ai-hint': 'black t-shirt' },
+  { id: 9, name: 'Bodycon Dress', image: picsum_images.bodycon_dress.src, 'data-ai-hint': 'bodycon dress' },
 ];
 
 export default function Home() {
