@@ -1,25 +1,14 @@
 
 "use client";
 
-import { useState, useTransition } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
-import { useToast } from "@/hooks/use-toast";
 import type { CapturedItem } from '@/lib/types';
-import { handleGestureTransfer } from '@/lib/actions';
-import { transferSchema } from '@/lib/schemas';
-
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, Share2, Eye, ImageIcon, VideoIcon } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Download, Eye, ImageIcon, VideoIcon } from 'lucide-react';
 
 
 interface CapturedMediaGalleryProps {
@@ -27,97 +16,32 @@ interface CapturedMediaGalleryProps {
 }
 
 export default function CapturedMediaGallery({ items }: CapturedMediaGalleryProps) {
-  const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CapturedItem | null>(null);
-  const [mediaData, setMediaData] = useState<string>('');
-
-  const form = useForm<z.infer<typeof transferSchema>>({
-    resolver: zodResolver(transferSchema),
-    defaultValues: {
-      gestureType: 'Swipe Left',
-      destinationDeviceId: '',
-    },
-  });
-
-  const toDataURL = (url: string): Promise<string> =>
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.blob()
-      })
-      .then(blob => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      }));
   
   const handleViewClick = (item: CapturedItem) => {
     setSelectedItem(item);
     setViewDialogOpen(true);
   };
 
-  const handleShareClick = async (item: CapturedItem) => {
-    setSelectedItem(item);
-    setShareDialogOpen(true);
-    setMediaData('');
-    
-    startTransition(async () => {
-      try {
-        const dataUri = await toDataURL(item.thumbnail);
-        setMediaData(dataUri);
-      } catch (error) {
-        console.error("Error converting image to data URI:", error);
-        toast({
-            variant: "destructive",
-            title: "Error preparing media",
-            description: "Could not prepare the media for transfer.",
-        });
-        setShareDialogOpen(false);
-      }
-    });
+  const handleDownloadClick = (item: CapturedItem) => {
+    // Create a temporary link element to trigger the download
+    const link = document.createElement('a');
+    link.href = item.thumbnail;
+    // Suggest a filename for the download
+    link.download = `virtustyle-capture-${item.id}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  async function onSubmit(values: z.infer<typeof transferSchema>) {
-    if (!mediaData) {
-        toast({
-            variant: "destructive",
-            title: "Media not ready",
-            description: "Please wait for the media to finish preparing.",
-        });
-        return;
-    }
-
-    startTransition(async () => {
-      const result = await handleGestureTransfer(mediaData, values);
-      if (result.error) {
-        toast({
-          variant: "destructive",
-          title: "Transfer Failed",
-          description: result.error,
-        });
-      } else {
-        toast({
-          title: "Transfer Initiated",
-          description: result.success,
-        });
-        setShareDialogOpen(false);
-        form.reset();
-      }
-    });
-  }
 
   return (
     <>
       <Card className="shadow-md">
         <CardHeader>
            <CardTitle className="font-headline">Captured Media</CardTitle>
-           <CardDescription>Share your virtual outfits.</CardDescription>
+           <CardDescription>Download your virtual outfits.</CardDescription>
         </CardHeader>
         <CardContent>
           {items.length === 0 ? (
@@ -139,9 +63,9 @@ export default function CapturedMediaGallery({ items }: CapturedMediaGalleryProp
                         <Eye className="h-4 w-4 mr-1" />
                         View
                       </Button>
-                      <Button size="sm" onClick={() => handleShareClick(item)} disabled={isPending}>
-                        <Share2 className="h-4 w-4 mr-1" />
-                        Share
+                      <Button size="sm" onClick={() => handleDownloadClick(item)}>
+                        <Download className="h-4 w-4 mr-1" />
+                        Download
                       </Button>
                     </div>
                   </div>
@@ -151,70 +75,6 @@ export default function CapturedMediaGallery({ items }: CapturedMediaGalleryProp
           )}
         </CardContent>
       </Card>
-
-      {/* Share Dialog */}
-      <Dialog open={shareDialogOpen} onOpenChange={setShareDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Transfer via Gesture</DialogTitle>
-            <DialogDescription>
-              Select a gesture and enter a destination device ID to transfer the media.
-            </DialogDescription>
-          </DialogHeader>
-          { isPending && !mediaData ? (
-            <div className="flex items-center justify-center h-40">
-                <Loader2 className="h-8 w-8 animate-spin text-primary"/>
-                <p className="ml-4">Preparing media...</p>
-            </div>
-          ) : (
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="gestureType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gesture</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a gesture" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Swipe Left">Swipe Left</SelectItem>
-                        <SelectItem value="Swipe Right">Swipe Right</SelectItem>
-                        <SelectItem value="Pinch">Pinch</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="destinationDeviceId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Destination Device ID</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., my-phone-123" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <DialogFooter>
-                <Button type="submit" disabled={isPending || !mediaData}>
-                  {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Transfer
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-          )}
-        </DialogContent>
-      </Dialog>
       
       {/* View Dialog */}
       <Dialog open={viewDialogOpen} onOpenChange={setViewDialogOpen}>
