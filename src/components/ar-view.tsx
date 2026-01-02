@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Camera, Video, VideoOff } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { picsum_images } from '@/lib/placeholder-images.json';
 
 interface ARViewProps {
   selectedGarment: Garment | null;
@@ -52,18 +53,29 @@ export default function ARView({ selectedGarment, onCapture }: ARViewProps) {
 
   return (
     <div className="relative w-full">
-      <Card className="w-full aspect-[9/16] max-h-[75vh] overflow-hidden relative shadow-lg flex items-center justify-center">
-        <video ref={videoRef} className="absolute inset-0 w-full h-full object-cover" autoPlay muted playsInline />
+      <Card className="w-full aspect-[9/16] max-h-[75vh] overflow-hidden relative shadow-lg flex items-center justify-center bg-muted">
+        {hasCameraPermission ? (
+          <video ref={videoRef} className="absolute inset-0 w-full h-full object-cover" autoPlay muted playsInline />
+        ) : (
+          <Image
+            src={picsum_images.person_fallback.src}
+            alt="Person fallback"
+            fill
+            className="object-cover"
+            priority
+            data-ai-hint="person fashion"
+          />
+        )}
         
         {hasCameraPermission === false && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white p-4 z-30">
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white p-4 z-10">
                 <VideoOff className="h-16 w-16 mb-4" />
                 <h3 className="text-xl font-bold">Camera permission denied</h3>
                 <p className="text-center">Please enable camera access in your browser to continue.</p>
             </div>
         )}
         
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-20 pointer-events-none">
           <AnimatePresence>
             {selectedGarment && (
               <motion.div
@@ -88,19 +100,8 @@ export default function ARView({ selectedGarment, onCapture }: ARViewProps) {
           </AnimatePresence>
         </div>
 
-        {hasCameraPermission === false && (
-            <div className="absolute bottom-4 left-4 right-4 z-20">
-                <Alert variant="destructive">
-                    <AlertTitle>Camera Access Required</AlertTitle>
-                    <AlertDescription>
-                        Please allow camera access in your browser settings to use this feature.
-                    </AlertDescription>
-                </Alert>
-            </div>
-        )}
-
       </Card>
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-4 z-20">
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
         <Button
           size="lg"
           className="rounded-full h-16 w-16 bg-background/80 backdrop-blur-sm text-primary hover:bg-background shadow-lg"

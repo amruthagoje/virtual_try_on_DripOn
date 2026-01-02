@@ -39,6 +39,11 @@
       "src": "https://picsum.photos/seed/black_shirt/400/600",
       "width": 400,
       "height": 600
+    },
+    "person_fallback": {
+      "src": "https://picsum.photos/seed/person/400/600",
+      "width": 400,
+      "height": 600
     }
   }
 }
