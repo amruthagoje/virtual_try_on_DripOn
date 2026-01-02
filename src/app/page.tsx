@@ -21,12 +21,10 @@ const garments: Garment[] = [
 ];
 
 export default function Home() {
-  const [selectedGarment, setSelectedGarment] = useState<Garment | null>(garments[0]);
+  const [selectedGarment, setSelectedGarment] = useState<Garment | null>(null);
   const [capturedItems, setCapturedItems] = useState<CapturedItem[]>([]);
 
   const handleCapture = (dataUrl: string, type: 'photo' | 'video') => {
-    if (!selectedGarment) return;
-  
     const newItem: CapturedItem = {
       id: Date.now(),
       type: type,
