@@ -9,7 +9,7 @@ export default function Header() {
             <HandMetal className="w-6 h-6 text-primary" />
           </div>
           <h1 className="text-2xl font-bold font-headline text-primary tracking-tight">
-            VirtuStyle
+            DripON
           </h1>
         </div>
       </div>

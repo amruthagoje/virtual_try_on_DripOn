@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'VirtuStyle',
+  title: 'DripON',
   description: 'Virtually try on clothes with AR, capture the look, and share with gestures.',
 };
 
