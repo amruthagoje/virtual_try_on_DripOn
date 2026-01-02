@@ -13,15 +13,14 @@ import { initiateAnonymousSignIn, addDocumentNonBlocking } from '@/firebase';
 import { collection, serverTimestamp } from 'firebase/firestore';
 
 const garments: Garment[] = [
-    { id: 1, name: 'Cyberpunk Jacket', image: picsum_images.cyberpunk_jacket.src, 'data-ai-hint': 'jacket cyberpunk' },
-    { id: 2, name: 'Holo-Dress', image: picsum_images.holo_dress.src, 'data-ai-hint': 'dress holographic' },
-    { id: 3, name: 'Gravity Boots', image: picsum_images.gravity_boots.src, 'data-ai-hint': 'boots futuristic' },
-    { id: 4, name: 'Stealth Suit', image: picsum_images.stealth_suit.src, 'data-ai-hint': 'jumpsuit stealth' },
-    { id: 5, name: 'Neon Visor', image: picsum_images.neon_visor.src, 'data-ai-hint': 'visor neon' },
-    { id: 6, name: 'Yellow T-Shirt', image: picsum_images.yellow_shirt.src, 'data-ai-hint': 'shirt yellow' },
-    { id: 7, name: 'Pink T-Shirt', image: picsum_images.pink_shirt.src, 'data-ai-hint': 'shirt pink' },
-    { id: 8, name: 'Black T-Shirt', image: picsum_images.black_shirt.src, 'data-ai-hint': 'shirt black' },
-    { id: 9, name: 'Bodycon Dress', image: picsum_images.bodycon_dress.src, 'data-ai-hint': 'bodycon dress' },
+    { id: 1, name: 'Red Dress', image: picsum_images.red_dress.src, 'data-ai-hint': 'red dress' },
+    { id: 2, name: 'Denim Jacket', image: picsum_images.denim_jacket.src, 'data-ai-hint': 'denim jacket' },
+    { id: 3, name: 'White Blouse', image: picsum_images.white_blouse.src, 'data-ai-hint': 'white blouse' },
+    { id: 4, name: 'Black Pants', image: picsum_images.black_pants.src, 'data-ai-hint': 'black pants' },
+    { id: 5, name: 'Floral Skirt', image: picsum_images.floral_skirt.src, 'data-ai-hint': 'floral skirt' },
+    { id: 6, name: 'Leather Jacket', image: picsum_images.leather_jacket.src, 'data-ai-hint': 'leather jacket' },
+    { id: 7, name: 'Blue Jeans', image: picsum_images.blue_jeans.src, 'data-ai-hint': 'blue jeans' },
+    { id: 8, name: 'Summer Dress', image: picsum_images.summer_dress.src, 'data-ai-hint': 'summer dress' },
 ];
 
 export default function Home() {
@@ -49,7 +48,7 @@ export default function Home() {
     const newItem: Omit<CapturedItem, 'id'> = {
       userId: user.uid,
       mediaType: type,
-      mediaUrl: dataUrl, // This should be the captured media data URL
+      mediaUrl: dataUrl,
       timestamp: serverTimestamp(),
       garmentId: selectedGarment.id.toString(),
       garmentName: selectedGarment.name,

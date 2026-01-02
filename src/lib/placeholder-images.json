@@ -1,52 +1,47 @@
 {
   "picsum_images": {
-    "cyberpunk_jacket": {
-      "src": "https://picsum.photos/seed/jacket/400/600",
+    "red_dress": {
+      "src": "https://picsum.photos/seed/reddress/400/600",
       "width": 400,
       "height": 600
     },
-    "holo_dress": {
-      "src": "https://picsum.photos/seed/dress/400/600",
+    "denim_jacket": {
+      "src": "https://picsum.photos/seed/denimjacket/400/600",
       "width": 400,
       "height": 600
     },
-    "gravity_boots": {
-      "src": "https://picsum.photos/seed/boots/400/600",
+    "white_blouse": {
+      "src": "https://picsum.photos/seed/whiteblouse/400/600",
       "width": 400,
       "height": 600
     },
-    "stealth_suit": {
-      "src": "https://picsum.photos/seed/suit/400/600",
+    "black_pants": {
+      "src": "https://picsum.photos/seed/blackpants/400/600",
       "width": 400,
       "height": 600
     },
-    "neon_visor": {
-      "src": "https://picsum.photos/seed/visor/400/600",
+    "floral_skirt": {
+      "src": "https://picsum.photos/seed/floralskirt/400/600",
       "width": 400,
       "height": 600
     },
-    "yellow_shirt": {
-      "src": "https://picsum.photos/seed/yellow_shirt/400/600",
+    "leather_jacket": {
+      "src": "https://picsum.photos/seed/leatherjacket/400/600",
       "width": 400,
       "height": 600
     },
-    "pink_shirt": {
-      "src": "https://picsum.photos/seed/pink_shirt/400/600",
+    "blue_jeans": {
+      "src": "https://picsum.photos/seed/bluejeans/400/600",
       "width": 400,
       "height": 600
     },
-    "black_shirt": {
-      "src": "https://picsum.photos/seed/black_shirt/400/600",
+    "summer_dress": {
+      "src": "https://picsum.photos/seed/summerdress/400/600",
       "width": 400,
       "height": 600
     },
     "person_fallback": {
       "src": "https://picsum.photos/seed/person/400/600",
-      "width": 400,
-      "height": 600
-    },
-    "bodycon_dress": {
-      "src": "https://picsum.photos/seed/bodycon2/400/600",
       "width": 400,
       "height": 600
     }
