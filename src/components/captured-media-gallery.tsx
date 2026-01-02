@@ -25,7 +25,12 @@ export default function CapturedMediaGallery({ items }: CapturedMediaGalleryProp
   };
 
   const handleDownloadClick = (item: CapturedItem) => {
-    window.open(item.url, '_blank');
+    const link = document.createElement('a');
+    link.href = item.url;
+    link.download = `virtustyle-capture-${item.id}.${item.type === 'photo' ? 'jpg' : 'webm'}`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
 
@@ -46,7 +51,11 @@ export default function CapturedMediaGallery({ items }: CapturedMediaGalleryProp
             <div className="grid grid-cols-3 gap-2">
               {items.map((item) => (
                 <div key={item.id} className="relative group aspect-square">
-                  <Image src={item.url} alt={`Captured ${item.type}`} layout="fill" objectFit="cover" className="rounded-md" />
+                  {item.type === 'photo' ? (
+                    <Image src={item.url} alt={`Captured ${item.type}`} layout="fill" objectFit="cover" className="rounded-md" />
+                  ) : (
+                    <video src={item.url} muted loop playsInline className="w-full h-full object-cover rounded-md" />
+                  )}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center rounded-md gap-2">
                     <div className="flex items-center justify-center">
                       {item.type === 'photo' ? <ImageIcon className="h-6 w-6 text-white" /> : <VideoIcon className="h-6 w-6 text-white" />}
