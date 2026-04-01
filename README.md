@@ -9,12 +9,12 @@ This project aims to revolutionize online shopping by reducing uncertainty in cl
 
 ## 🎯 Features
 
-👕 Virtual Try-On – Try clothes in real-time using camera
-🎥 Live Preview – Instant outfit visualization
-📸 Capture Photos & Videos – Save your looks
-🤳 Gesture-Based Interaction (optional)
-📤 Media Sharing – Transfer images/videos
-🧠 Smart Fitting System – Adjust clothes to body shape
+* 👕 Virtual Try-On – Try clothes in real-time using camera
+* 🎥 Live Preview – Instant outfit visualization
+* 📸 Capture Photos & Videos – Save your looks
+* 🤳 Gesture-Based Interaction (optional)
+* 📤 Media Sharing – Transfer images/videos
+* 🧠 Smart Fitting System – Adjust clothes to body shape
 
 ---
 
@@ -91,20 +91,20 @@ python app.py
 
 ## 💡 Usage
 
-🛍️ Online shopping platforms
-👗 Fashion retail stores
-📱 AR-based mobile apps
-🧑‍🎨 Personal styling
+* 🛍️ Online shopping platforms
+* 👗 Fashion retail stores
+* 📱 AR-based mobile apps
+* 🧑‍🎨 Personal styling
 
 ---
 
 ## 🚀 Future Enhancements
 
-🔥 AI-based size recommendation
-🧍 3D avatar generation
-🛒 Direct shopping integration
-🌐 Cloud outfit storage
-🧠 Personalized styling suggestions
+* 🔥 AI-based size recommendation
+* 🧍 3D avatar generation
+* 🛒 Direct shopping integration
+* 🌐 Cloud outfit storage
+* 🧠 Personalized styling suggestions
 
 ---
 
